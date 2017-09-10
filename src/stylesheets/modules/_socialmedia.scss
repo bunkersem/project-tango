@@ -1,0 +1,83 @@
+.gsignin, .gsignin:hover, .gsignin:active, .gsignin:focus {
+    box-shadow: 0 3px 3px -2px rgba(0,0,0, 0.2);
+    color: rgba(0,0,0, 0.54);
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 14px;
+    overflow: hidden;
+    background: #fff;
+    padding: 2px 10px 2px 2px;
+    display: inline-block;
+    border: none;
+    text-decoration: none;
+    user-select: none;
+    border-radius: 4px;
+    line-height: 0;
+
+
+    :disabled {
+        .img {
+            background-image: url('/images/google/btn_google_light_disabled_ios.svg');
+        }
+    }
+
+    :active {
+        .img {
+            background-image: url('/images/google/btn_google_light_pressed_ios.svg');
+        }
+    }
+
+    p {
+        margin: 19px 8px 8px 8px;
+        line-height: 0;
+        text-transform: uppercase;
+        vertical-align: top;
+        text-align: left;
+        display: inline-block;
+    }
+    .img {
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        background: url('/images/google/btn_google_light_normal_ios.svg') no-repeat left center;
+        background-size: cover;
+        margin-right: 8px;
+    }
+}
+
+.fsignin, .fsignin:hover, .fsignin:active, .fsignin:focus {
+  
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    max-width: 400px;
+    user-select: none;
+    background: rgb(66, 103, 178);
+    border-radius: 4px;
+    padding-right: 30px;
+    text-decoration: none;
+
+    table {
+        table-layout: fixed;
+        border-spacing: 0px 0px;
+
+        svg {
+        margin: 7px;
+            height: 24px;
+            width: 24px;
+            overflow: hidden;
+        }
+
+        .login-facebook-text {
+            vertical-align: middle;
+            padding-bottom: 4px;
+            color: rgb(255, 255, 255);
+            font: normal normal normal normal 16px / 20.48px Helvetica, Arial, sans-serif;
+        }
+    }
+}
+
+#loginProviderList {
+    padding: 10px;
+    text-align: center;
+}

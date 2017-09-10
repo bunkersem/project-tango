@@ -1,0 +1,29 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Bower dependency directory (https://bower.io/)
+bower_components
+
+# node dependency directory
+node_modules
+
+# application specific
+public/
+server/config.json
+deploy.bat
+schema_dump_file
+
+# Optional npm cache directory
+.npm
+
+# dotenv environment variables file
+.env
+
+# vscode
+.vscode
+
+[production]
+!/server/config.json
+!schema_dump_file

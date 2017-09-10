@@ -1,0 +1,69 @@
+style
+    //-
+       $color-danger: rgb(223, 56, 44);
+       $color-success: rgb(56, 180, 74);
+       $color-info: rgb(119, 41, 83);
+       $color-primary: rgb(233, 84, 32);
+       $color-warning: rgb(239, 183, 62);
+       $color-default: rgb(174, 167, 159);
+
+
+    include ../../public/stylesheets/main.css
+
+
+#wrapper
+    .jumbotron
+        h2 Er is een nieuwe order geplaatst
+    p.lead Contact Informatie:
+    ul.list-group
+        li.list-group-item Voornaam: #{fName} 
+        li.list-group-item Tussenvoegsel: #{mName}
+        li.list-group-item Achternaam: #{lName}
+        li.list-group-item Bedrijf: #{businessName}
+        li.list-group-item Telefoon: #{tel}
+        li.list-group-item E-mail: #{email}
+    p &nbsp;
+    p.lead Adres Informatie:
+    ul.list-group
+        li.list-group-item Straatnaam: #{streetName}
+        li.list-group-item Plaats: #{placeOfResidence}
+        li.list-group-item Provincie: #{province}
+        li.list-group-item Postcode: #{postalCode}
+        li.list-group-item Huisnummer: #{streetNumber}
+        li.list-group-item Land: #{country}
+        
+    p &nbsp;
+    p.lead Overige:
+    ul.list-group
+        li.list-group-item Opmerkingen: #{remarks}
+        li.list-group-item Unieke Bestellings Code: #{code}
+    p &nbsp;
+    p.lead Bestelde Artikelen:
+    table.table.table-striped
+        tbody
+            tr
+                th Titel
+                th Catagorie
+                th Aanmaak datum
+                th Prijs
+                th Vooraad
+                th Id
+            each art in articles
+                tr
+                    td= art.title
+                    td= art.catagory
+                    - var date = new Date(parseInt(art.created));
+                    td= date.toDateString()
+                    td #{parseFloat(art.price).toFixed(2)}€
+                    td= art.stock
+                    td= art.id
+    p &nbsp;
+    ul.list-group
+        li.list-group-item Artikelen prijzen: #{articleCosts.toFixed(2)}€
+        li.list-group-item Btw: #{btw.toFixed(2)}€
+        li.list-group-item Bezorging: #{delivery.toFixed(2)}€
+        li.list-group-item
+            b Totaal: #{total.toFixed(2)}€
+    a.btn.btn-primary(href="http://www.spelletjeskast.nl/admin/") Administrator Pagina
+        
+    

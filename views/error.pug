@@ -1,0 +1,15 @@
+extends partials/layout
+
+
+block head
+    link(rel="canonical", href="/")
+
+block content
+    section.container.pageContent(style="min-height: 60%;")
+        h1
+            .glyphicon.glyphicon-warning-sign
+            |   Er is een fout.
+        
+        p= message
+        p= error.status || ''
+        p= error.trace || ''

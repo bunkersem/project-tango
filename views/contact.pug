@@ -1,0 +1,108 @@
+extends ./partials/layout
+
+block head
+    link(rel="canonical", href="/contact")
+
+block content
+    section.container.pageContent
+        style.
+            .form-group > input[name="potOfHoney"] {
+                display: none;
+            }
+            
+        .panel.panel-default
+            .panel-heading
+                h2 
+                    .glyphicon.glyphicon-user
+                    |   &nbsp;Contact
+            .panel-body
+                p.text-uppercase= contact.displayDomain
+                br
+                p= contact.personalName
+                p #{contact.postalCode} #{contact.residence}
+                .alert.alert-danger <span class="glyphicons glyphicons-exclamation-sign"></span> Dit is <b>geen</b> bezoek adres
+                
+                p <span class="glyphicons glyphicons-earphone"></span>
+                p Phone Number: 
+                    - var phoneNum = 'tel:' + contact.tel;
+                    a(href=phoneNum)= contact.tel
+                p Whatsapp: #{contact.whatsapp}
+                p
+                    -var mailHref = 'mailto:' + contact.email;
+                    a(href= mailHref)= contact.email
+        .panel.panel-default.my-5
+            .panel-heading
+                h2 
+                    .glyphicon.glyphicon-piggy-bank
+                    |   &nbsp;Bank Gegevens
+            .panel-body
+                p.text-uppercase= contact.bankAbbrev
+                p.text-uppercase IBAN: #{contact.iban}
+                p.text-uppercase BIC: #{contact.bic}
+                p.text-uppercase Kvk nr: #{contact.kvk}
+                p BTW nr: #{contact.btw}
+                p Betalingen moeten altijd worden overgemaakt naar dit rekingingnummer.
+        
+        
+        #contactForm.panel.panel-default.my-5
+            .panel-heading
+                h2 
+                    .glyphicon.glyphicon-send
+                    |   &nbsp;Contact opnemen
+            .panel-body
+                if (success)
+                    .alert.alert-success Uw bericht is succesvol verzonden.
+                if (errors)
+                    each err in errors
+                        .alert.alert-danger= err.msg
+                
+                form(action="/contact/mail#contactForm", method="POST")
+                    .form-group
+                        input(type="text", name="potOfHoney")
+                    .form-group
+                        label(for="contactName") Naam
+                        input#contactEmail.form-control(type="text", name="contactName", placeholder="Uw Naam", required)
+                    .form-group
+                        label(for="contactEmail") E-Mail adres
+                        input#contactEmail.form-control(type="email", name="contactEmail", placeholder="Uw E-mail", required)
+                        p.help-block Het E-Mail Adres waarop u teruggemaild wilt worden.
+                    .form-group
+                        label(for="contactSubject") Onderwerp
+                        input#contactSubject.form-control(type="text", name="contactSubject", placeholder="Onderwerp", required)
+                    .form-group
+                        label(for="contactMessage") Bericht
+                        textarea#contactMessage.form-control(rows="10", name="contactMessage", required)
+                    .form-group
+                        .g-recaptcha(data-sitekey="6LeSIyoUAAAAABkCh7MbjgNpn_SDOYW5wLO59REr", data-callback="enableContactSubmitBtn")
+                    //- button will be enabled once the recaptcha is succesfull.
+                    button#contactSubmit.btn.btn-success.btn-lg(type="submit", disabled="true") Verzenden
+        .my-5
+        p
+            include ./partials/facebook
+        p
+            include ./partials/twitter
+        .my-5
+
+        
+                    
+            
+    
+//-
+    "contact":{
+        "tel": "0612345678",
+        "email": "fake@service@gmail.com",
+        "displayDomain":"www.spelletjeskast.nl",
+        "personalName":"voornaam achternaam",
+        "postalCode":"1234FK",
+        "residence":"Oosterhout NB",
+        "whatsapp":"0612345678"
+    },
+    "payment":{
+        "iban": "NL47-***************",
+        "bankAbbrev": "ASNB",
+        "bic":"ASNBNL2H",
+        "kvk": 12345678,
+        "btw": "NL12345678C90"
+
+    }
+

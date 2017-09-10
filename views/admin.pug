@@ -1,0 +1,123 @@
+extends ./partials/layout
+block head
+    link(rel="canonical", href="/")
+
+block content
+    section.pageContent.container.mb-2
+        .btn-group.content-switch
+            .btn.btn.lg.btn-primary.content-switch-btn(data-target="article-upload") Upload
+            .btn.btn.lg.btn-primary.content-switch-btn(data-target="admin-article-listing") Artikelen
+            .btn.btn.lg.btn-primary.content-switch-btn(data-target="admin-misc") Overige
+
+        #admin-article-listing(style="display: none;")
+            .container-fluid.article-container.mt-3(sort-by="title")
+                - var n = 40;
+                .row
+                    while n-- > 0
+                        .col-xs-4(style="padding: 10px;")
+                            .article(style="background: #ddd; padding: 10px;")
+                                button.remove-article.btn.btn-danger.btn-circle.btn-lg(type="button" style="position: absolute; top: 0; right: 0;")
+                                    i.glyphicon.glyphicon-remove
+                                div.article-image(style="width: 100%; height: 120px; background-clip: border-box; background-position: center center; background-size: contain;")
+                                h3.article-title
+                                .article-id(style="display: none;")
+                                p.article-description
+
+        #admin-misc(style="display: none;")
+            h2 Orders download (voor excel)
+                a.btn.btn-info.btn-lg(type="button", href="/")
+        
+        #article-upload
+            h1 File Uploader
+            form#upload-form(encType="multipart/form-data")
+                
+                .form-group
+                    label(for="article-title") Titel (maximum van 100 characters)
+                    input#article-title.form-control(type="text", name="title", placeholder="Titel", required)
+                .form-group
+                    label(for="article-description") Description
+                    textarea#article-description.form-control(name="description", wrap="hard", placeholder="Vul hier een descriptie in.", required)
+                .form-group
+                    label(for="article-catagory") Catagory
+                    select#article-catagory.form-control(name="catagory")
+                        each catagory in catagories
+                            option(class=catagory.name)= catagory.name
+                .form-group
+                    label(for="article-stock") Voorraad
+                    input#article-stock.form-control(type="number", min=0, step=1, name="stock", value=1, required)
+
+                .form-group
+                    label(for="article-price") Prijs
+                    input#article-price.form-control.input-decimal(type="text", name="price", value=12.57, required)
+
+                .form-group
+                    label(for="article-main-image") Hoofd Afbeelding
+                    input#article-main-image.form-control(type="file", accept="image/x-png,image/bmp,image/jpeg", required)
+                    p.help-block Kies afbeeldingen in PNG, JPG/JPEG of BMP formaat.
+                .form-group
+                    label(for="article-images") Afbeeldingen
+                    input#article-images.form-control(type="file", accept="image/x-png,image/bmp,image/jpeg", required, multiple)
+                    p.help-block Kies afbeeldingen in PNG, JPG/JPEG of BMP formaat.
+                button#article-submit.btn.btn-primary(type="button", data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Uploaden...", onclick="uploadArticle(event);") Verzenden/Goedkeuren    
+block modals
+
+    #loginModal.modal.fade.in(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    a.close(href="/", type="button", data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4.modal-title Login
+                .modal-body
+                    form#admin-form.form
+                        .form-group
+                            label(for="admin-email") Email
+                            input#admin-email.form-control(type="text", name="email", required, value= email)
+                        .form-group
+                            label(for="admin-password") Password
+                            input#admin-password.form-control(type="password", name="password", required)
+                            span(class="help-block") 
+                        .form-group
+                            button.btn.btn-primary.btn-lg(type="button", onclick="AdminSignin(new FormData(document.getElementById('admin-form')))") Sign In
+
+    #article-edit-modal.modal.fade(role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type="button", data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4.modal-title Edit
+                .modal-body#admin-edit
+                    form#admin-edit-form.form
+                        input#article-edit-id(type="number", name="id", style="display: none;")
+                        .form-group
+                            label(for="article-edit-title") Titel (maximum van 100 characters)
+                            input#article-edit-title.form-control(type="text", name="title", placeholder="Titel", required)
+                        .form-group
+                            label(for="article-edit-description") Description
+                            textarea#article-edit-description.form-control(name="description", wrap="hard", placeholder="Vul hier een descriptie in.", required)
+                        
+                        .form-group
+                            label(for="article-edit-stock") Voorraad
+                            input#article-edit-stock.form-control(type="number", min=0, step=1, name="stock", value=1, required)
+
+                        .form-group
+                            label(for="article-edit-price") Prijs
+                            input#article-edit-price.form-control(type="text", name="price", value=12.57, required)
+
+                        .form-group
+                            label(for="article-edit-catagory") Catagory
+                            select#article-edit-catagory.form-control(name="catagory")
+                                each catagory in catagories
+                                    option(class=catagory.name)= catagory.name
+
+                        button#article-edit-submit.btn.btn-primary(type="button", data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Uploaden...") Updaten
+    
+
+block scripts
+    script.
+        $('.input-decimal').on('input', function(e){
+            var $target = $(e.target).closest('.input-decimal');
+            $target.val($target.val().replaceAll(',', '.'))
+        })
+        $('.input-decimal').trigger('input');

@@ -1,0 +1,35 @@
+doctype html
+html(lang="nl")
+    head
+        meta(charset="UTF-8")
+        meta(name="description", content= description || "Koop tweede hands spelletjes voor een goede prijs, op mijnspelletjeskast.nl.")
+        meta(name="keywords", content= keywords || "Spelletjes, Markplaats, Kast, Tweede hands, Nieuw")
+        meta(name="author", content="Sem Postma")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(name="google-signin-client_id", content="946389181342-4l8ptoj1307a7qa071n6651ecsu4elgu.apps.googleusercontent.com")
+        
+        // To make Optional Comments work.
+        meta(http-equiv="X-UA-Compatible", content="IE=EmulateIE9")
+        <!--[if IE]><!--><script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script><!--<![endif]-->
+
+        link(rel="stylesheet", href="/stylesheets/main.css")
+        link(type="text/plain", rel="author", href="/humans.txt")
+        
+        script(src="https://apis.google.com/js/platform.js", async, defer)
+        title= title
+        
+        block head
+
+    body
+        block page
+        #articleDescriptionDropdown.dropdown-menu.dropover(role="menu")
+
+        script(src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js")
+        script(type="text/javascript", src="/bower_components/jquery/dist/jquery.min.js")
+        script(type="text/javascript", src="/bower_components/bootstrap/dist/js/bootstrap.min.js")
+        script(src='https://www.google.com/recaptcha/api.js')
+        
+        
+        script(type="text/javascript", src="/javascripts/scripts.js")
+
+        block scripts

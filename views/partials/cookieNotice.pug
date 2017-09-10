@@ -1,0 +1,10 @@
+.modal#cookieNotice(tabindex='-1', role='dialog', aria-labelledby='Cookie Melding', aria-hidden='true')
+  .modal-dialog.modal-sm
+    .modal-content
+        .modal-header
+            h2 Wij gebruiken cookies
+        .modal-body
+            p Het gebruik van cookies helpt ons in het verifiëren van gebruikers. Door verder te gaan met deze website staat u ons gebruik van cookies toe. 
+            a.btn.btn-info(href="http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm", target="_blank") Meer leren?
+        .modal-footer
+            .btn.btn-success(data-dismiss="modal" onclick="cookieNoticeAgreed(event)") Ik heb het begrepen.

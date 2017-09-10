@@ -1,0 +1,18 @@
+$background: #eee;
+$frontground: #fff;
+$white: #fff;
+$black: #000;
+
+$xs: 768px;
+$sm: 992px;;
+$md: 1200px;
+
+$color-danger: rgb(223, 56, 44);
+$color-success: rgb(56, 180, 74);
+$color-info: rgb(119, 41, 83);
+$color-primary: rgb(233, 84, 32);
+$color-warning: rgb(239, 183, 62);
+$color-default: rgb(174, 167, 159);
+
+
+$background: lighten($color-default, 23)

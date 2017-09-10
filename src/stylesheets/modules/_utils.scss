@@ -1,0 +1,47 @@
+$distances: 5;
+
+@mixin createDistanceClasses($i) {
+    .mt-#{$i} { margin-top: #{determineDistance($i)}; }
+    .mb-#{$i} { margin-bottom: #{determineDistance($i)}; }
+    .ml-#{$i} { margin-left: #{determineDistance($i)}; }
+    .mr-#{$i} { margin-right: #{determineDistance($i)}; }
+    .my-#{$i} { 
+        margin-bottom: #{determineDistance($i)}; 
+        margin-top: #{determineDistance($i)}; 
+    }
+    .mx-#{$i} { 
+        margin-left: #{determineDistance($i)}; 
+        margin-right: #{determineDistance($i)}; 
+    }
+    .m-#{$i} {
+        margin: #{determineDistance($i)};
+    }
+
+    .pt-#{$i} { padding-top: #{determineDistance($i)}; }
+    .pb-#{$i} { padding-bottom: #{determineDistance($i)}; }
+    .pl-#{$i} { padding-left: #{determineDistance($i)}; }
+    .pr-#{$i} { padding-right: #{determineDistance($i)}; }
+    .py-#{$i} { 
+        padding-bottom: #{determineDistance($i)}; 
+        padding-top: #{determineDistance($i)}; 
+    }
+    .px-#{$i} { 
+        padding-left: #{determineDistance($i)}; 
+        padding-right: #{determineDistance($i)}; 
+    }
+    .p-#{$i} {
+        padding: #{determineDistance($i)}; 
+    } 
+}
+
+@function determineDistance($dist) {
+    @if ($dist == auto){
+        @return auto;
+    } 
+    @return ($dist * 10) + 'px';
+}
+
+@include createDistanceClasses(auto);
+@for $i from 0 through $distances {
+    @include createDistanceClasses($i);
+}

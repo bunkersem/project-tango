@@ -1,0 +1,332 @@
+// Externals
+@import '../../bower_components/bootswatch-dist/css/bootstrap.min.css';
+@import '../../bower_components/css-ripple-effect/dist/ripple.min.css';
+
+// Partials
+@import 'partials/variables';
+
+// Modules
+@import 'modules/navbar';
+@import 'modules/sidebar';
+@import 'modules/article';
+@import 'modules/roundbutton';
+@import 'modules/socialmedia';
+@import 'modules/utils';
+@import 'modules/footer';
+
+// Fonts
+@import '../../bower_components/roboto-fontface/css/roboto/roboto-fontface.css';
+
+body {
+    overflow-x: hidden;
+    font-family: 'Roboto';
+    background: $background;
+    //background: $color-primary;
+}
+
+@keyframes slideDown {
+    10% { transform: translateY(-4000px); }
+    11% { transform: translateY(-4000px); }
+    to { transform: translateX(0px); }
+}
+
+section.pageContent {
+    background: $white;
+    @media screen and (min-width: 768px) {
+        animation: slideDown 1000ms ease-out;
+    }
+}
+
+#wrapper {
+
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+
+section {
+    padding-top: 30px;
+}
+
+.nav-margin {
+    margin-left: 2px;
+}
+
+.dropover {
+    pointer-events: none;
+    user-select: none;
+    padding: 5px 7px 5px 7px;
+}
+
+
+// Lander
+
+$search-form-button-width: 100px;
+
+.hidden {
+    display: none;
+}
+
+.text-white {
+    color: white;
+}
+
+@function getColFromType($col){
+    @if ($col == danger){
+        @return $color-danger;
+    }
+    @if ($col == success){
+        @return $color-success;
+    }
+    @if ($col == primary){
+        @return $color-primary;
+    }
+    @if ($col == default){
+        @return $color-default;
+    }
+    @if ($col == warning){
+        @return $color-warning;
+    }
+    @if ($col == info){
+        @return $color-info;
+    }
+}
+
+
+@mixin panelPolyFill($col){
+    .panel-#{$col} {
+        border-color: getColFromType($col);
+        .panel-heading {
+            color: #fff;
+            background-color: getColFromType($col);
+        }
+    }
+}
+
+@include panelPolyFill(default);
+@include panelPolyFill(primary);
+@include panelPolyFill(success);
+@include panelPolyFill(warning);
+@include panelPolyFill(danger);
+@include panelPolyFill(info);
+
+@media screen and (min-width: 768px) {
+    #banner::after {
+        content: " ";
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        display: block;
+        background-image: linear-gradient(transparent 0%, transparent, 80%, $background 100%);
+    }
+}
+
+
+#banner {
+    margin-bottom: -140px;
+    height: 340px;
+
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-color: #e9eef1;
+    background-image: url("/images/lander-new-2.jpg");
+    background-clip: border-box;
+    background-size: cover;
+    overflow: hidden;
+    
+
+    // .title {
+    //     color: white;
+    //     font-size: 120px;
+    //     text-rendering: auto;
+    //     text-shadow: 0 0 1px rgba(0,0,0,.6);
+    //     @media screen and (max-width: 720px) {
+    //         font-size: 80px;
+    //     }
+    //     @media screen and (max-width: 540px) {
+    //         font-size: 60px;
+    //     }
+    // }
+
+    // .description {
+    //     color: white;
+    //     font-size: 40px;
+    //     text-rendering: auto;
+    //     text-shadow: 0 0 1px rgba(0,0,0,.6);
+    //     @media screen and (max-width: 720px) {
+    //         font-size: 30px;
+    //     }
+    //     @media screen and (max-width: 540px) {
+    //         font-size: 25px;
+    //     }
+    // }
+    // .search-form {
+    //     width: 40%;
+    //     @media screen and(max-width: 1140px) {
+    //         width: 50%;
+    //     }
+    //     @media screen and(max-width: 960px) {
+    //         width: 60%;
+    //     }
+    //     @media screen and(max-width: 720px) {
+    //         width: 70%;
+    //     }
+    //     @media screen and(max-width: 540px) {
+    //         width: 80%;
+    //     }
+
+    //     margin: auto;
+    //     text-align: center;
+    //     background: white;
+    //     border-radius: 5px;
+    //     padding: 0;
+    //     overflow: hidden;
+    //     * {
+    //         display: inline-block;
+    //         margin: 0;
+    //     }
+    //     #header-search-bar {
+    //         float: left;
+    //         width: auto;
+    //         width: calc(100% - #{$search-form-button-width + 10px});
+    //         margin: auto;
+    //         -moz-appearance: none;
+    //         -webkit-appearance: none;
+    //         appearance: none;
+    //         border: none;
+    //         outline: none;
+    //         font-size: 36px;
+    //         padding: 2px 10px;
+    //         color: #777;
+    //     }
+    //     #btn-header-search {
+    //         vertical-align: middle;
+    //         padding: 15px 10px;
+    //         max-width: 25%;
+    //         margin: 3px;
+    //         float: right;
+    //         width: $search-form-button-width;
+    //     }
+    // }
+    
+}
+
+
+// Articles
+
+.article {
+    background: #ddd;
+    padding: 10px;
+    
+    // Visibility is set to hidden initially, 
+    // this will be overriden when the article is loaded.
+    visibility: hidden;
+}
+
+.article-description {
+
+}
+.article-catagory {
+
+}
+
+.article-image {
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-color: #e9eef1;
+    background-image: url("/images/placeholder-sm.png");
+    background-clip: border-box;
+    background-size: contain;
+    width: 100%;
+    height: 120px;
+}
+
+#article {
+
+}
+
+#article-image {
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-color: #e9eef1;
+    background-image: url("/images/placeholder-sm.png");
+    background-clip: border-box;
+    background-size: contain;
+}
+
+.clearfix {
+    clear: both;
+}
+
+
+.basketArticle .articleCheckoutImage {
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-color: #e9eef1;
+    background-image: url("/images/placeholder-sm.png");
+    background-clip: border-box;
+    background-size: contain;
+    width: 120px;
+    height: 120px;
+    float: left;
+}
+
+.basketArticle .bucketRemoveButton {
+    float: right;
+    font-size: 26px;
+    
+    p {
+        position: relative;
+        top: -10px;
+    }
+    
+}
+
+.basketArticle .info {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+}
+
+
+
+.basketArticle .title {
+
+}
+
+.basketArticle .amount {
+    
+}
+
+.basketArticle .price {
+    
+}
+
+.display-1 {
+    font-size: 80px;
+}
+
+.display-2 {
+    font-size: 62px;
+}
+
+.display-3 {
+    font-size: 46px;
+}
+
+.display-4 {
+    font-size: 36px;
+}
+
+.display-5 {
+    font-size: 28px;
+}

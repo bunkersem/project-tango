@@ -1,0 +1,145 @@
+extends partials/layout
+
+block head
+    link(rel="canonical", href="/checkout")
+
+block content
+    section.container.pageContent
+        
+        h2.mb-4 Winkelwagen
+        #basket
+        h4 Artikelen: 
+            span#checkoutArticlesPrice
+            |   €
+        h4 BTW (21%): 
+            span#checkoutBtw
+            |   €
+        h4 Bezorging: 
+            span#checkoutDeliveryCosts
+            |   €
+        h3 Totale Prijs: 
+            span#checkoutTotal
+            |   €
+        
+
+        form#checkoutForm.mt-5(action="/checkout/finish", method="POST")
+            - user = user || {};
+            input#checkoutArticles.hidden(type="text", name="checkoutArticles", value="")
+            .row
+                .ml-1.col.col-xs-6
+                    each err in checkoutErrors || []
+                        .alert.alert-danger(role="alert") !{err}
+            .row
+                .form-group.col.col-lg-4.col-xs-12
+                    label(for="checkoutFName") Voornaam
+                        span(aria-hidden="true")  *  
+                        each err in checkoutFNameErrors || []
+                            span.label.label-danger !{err}  
+                    input.form-control#checkoutFName(type="text", name="checkoutFName", value= user.name placeholder="uw voornaam", required)
+                .form-group.col.col-lg-4.col-xs-12
+                    label(for="checkoutMName") Tussenvoegsel
+                        each err in checkoutMNameErrors || []
+                            span.label.label-danger !{err}
+                    input.form-control#checkoutMName(type="text", name="checkoutMName", placeholder="tussenvoegsel")
+
+                .form-group.col.col-lg-4.col-xs-12
+                    label(for="checkoutLName") Achternaam
+                        span(aria-hidden="true")  *
+                        each err in checkoutLNameErrors || []
+                            span.label.label-danger !{err}
+                    input.form-control#checkoutLName(type="text", name="checkoutLName", placeholder="uw achternaam", required)
+            .row
+                .form-group.col.col-lg-6.col-xs-12
+                    label(for="checkoutBusinessName") Bedrijf
+                        each err in checkoutBusinessNameErrors || []
+                            span.label.label-danger !{err}
+                    input.form-control#checkoutBusinessName(type="text", name="checkoutBusinessName")
+
+                .form-group.col.col-lg-6.col-xs-12
+                    label(for="checkoutTelNum") Telefoon
+                        span(aria-hidden="true")  *  
+                        each err in checkoutTelNumErrors || []
+                            span.label.label-danger !{err}
+                    input.form-control#checkoutTelNum(type="text", name="checkoutTelNum", pattern="[a-zA-Z0-9]*" placeholder="uw telefoon nummber", required)
+            .row   
+                .form-group.col.col-lg-12.col-xs-12
+                    label(for="checkoutEmailAdress") E-mailadres
+                        span(aria-hidden="true")  *  
+                        each err in checkoutEmailAdressErrors || []
+                            span.label.label-danger !{err}
+                    input.form-control#checkoutEmailAdress(type="text", name="checkoutEmailAdress", value= user.email placeholder="uw e-mailadres", required)
+            .row
+                .form-group.col.col-lg-4.col-xs-12
+                    label(for="checkoutSreetname") Straatnaam
+                        span(aria-hidden="true")  *
+                        each err in checkoutSreetnameErrors || []
+                            span.label.label-danger !{err}
+                    input.form-control#checkoutSreetname(type="text", name="checkoutSreetname", required, placeholder="straat naam")
+
+                .form-group.col.col-lg-4.col-xs-12
+                    label(for="checkoutResidenceName") Plaats
+                        span(aria-hidden="true")  *  
+                        each err in checkoutResidenceNameErrors || []
+                            span.label.label-danger !{err}
+                    input.form-control#checkoutResidenceName(type="text", name="checkoutResidenceName", required, placeholder="uw woonplaats")
+                .form-group.col.col-lg-4.col-xs-12
+                    label(for="checkoutProvince") Provincie
+                        span(aria-hidden="true")  *  
+                        each err in checkoutProvinceErrors || []
+                            span.label.label-danger !{err}
+                    input.form-control#checkoutProvince(type="text", name="checkoutProvince", required, placeholder="uw woonplaats")
+            
+            .row
+                .form-group.col.col-lg-5.col-xs-9
+                    label(for="checkoutPostalCode") Postcode
+                        span(aria-hidden="true")  *  
+                        each err in checkoutPostalCodeErrors || []
+                            span.label.label-danger !{err}
+                    input.form-control#checkoutPostalCode(type="text", pattern="[a-zA-Z0-9]*" name="checkoutPostalCode", required, placeholder="uw postcode")
+
+                .form-group.col.col-lg-2.col-xs-3
+                    label(for="checkoutStreetNumber") Huisnummer
+                        span(aria-hidden="true")  *  
+                        each err in checkoutStreetNumberErrors || []
+                            span.label.label-danger !{err}
+                    input.form-control#checkoutStreetNumber(type="text", pattern="[a-zA-Z0-9]*" name="checkoutStreetNumber", required, placeholder="uw postcode")
+
+                .form-group.col.col-lg-5.col-xs-12
+                    label(for="checkoutCountry") Land
+                        span(aria-hidden="true")  *  
+                        each err in checkoutCountryErrors || []
+                            span.label.label-danger !{err}
+                    select.form-control#checkoutCountry(name="checkoutCountry", tabindex="-98", required)
+                        option(value="NL") Nederland
+                        option(value="BE") België
+                        
+            .row
+
+                .form-group.col.col-lg-6.col-xs-12
+                    label(for="checkoutRemarks") Opmerkingen
+                    textarea.form-control#checkoutRemarks(type="text", name="checkoutRemarks", placeholder="opmerkingen", rows="10")
+                    
+            button(type="button", data-toggle="modal", data-target="#checkoutPrompt").btn.btn-success.mb-2 Bestellen
+                
+
+
+
+
+            
+            
+block scripts
+
+block modals
+    .modal.fade#checkoutPrompt(tabindex="-1" role="dialog", aria-labelledby="checkoutPromptTitle")
+        .modal-dialog(role="document")
+            .modal-content
+                .modal-header
+                    button.close(type="button", data-dismiss="modal", aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4.modal-title#checkoutPromptTitle Bevestigen?
+                .modal-body
+                    p
+                        span#checkoutPromptContent Weet u zeker dat u de bestelling wilt afronden.
+                .modal-footer
+                    button.btn(type="button", data-dismiss="modal") Close
+                    button#orderButton.btn.btn-success(type="submit", form="checkoutForm") Bevestigen en Bestellen

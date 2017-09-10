@@ -1,0 +1,69 @@
+style
+    //-
+        $color-danger: rgb(223, 56, 44);
+        $color-success: rgb(56, 180, 74);
+        $color-info: rgb(119, 41, 83);
+        $color-primary: rgb(233, 84, 32);
+        $color-warning: rgb(239, 183, 62);
+        $color-default: rgb(174, 167, 159);
+    
+
+    include ../../public/stylesheets/main.css
+
+
+#wrapper
+    .jumbotron
+        h2 Bestelling in gang gezet.
+
+    h2 Uw unieke bestellings code is: #{code}
+
+    p.lead Artikelen:
+    ul.list-group
+        each art in articles
+            li.list-group-item #{art.title}
+    
+    p U heeft deze artikelen gekocht voor een totale prijs van 
+        b #{total.toFixed(2)}€
+
+    h2.text-warning Belangrijk!
+    p Maak het totale bedrag van <b> #{total.toFixed(2)}€ </b> over naar het iban nummer: <b> #{iban} </b> onder de omschrijving: <b>"unieke code: #{code}"</b>
+    p Het is belankrijk dat u de unieke code in het omschrijvings veld toevoegd zodat we kunnen controleren om welke bestelling het gaat.
+    p Als u iets niet vertrouwd, vragen of een opermeking heeft kunt u contact openemen (contact gegevens staan onderaan de e-mail).
+    br
+    p Veel spelplezier gewenst!
+
+    p Details:
+    ul.list-group
+        li.list-group-item Artikelen prijzen: #{articleCosts.toFixed(2)}€
+        li.list-group-item Btw: #{btw.toFixed(2)}€
+        li.list-group-item Bezorging: #{delivery.toFixed(2)}€
+        li.list-group-item
+            b Totaal: #{total.toFixed(2)}€
+
+    p.lead Uw bestellings gegevens:
+    ul.list-group
+        li.list-group-item Voornaam: #{fName} 
+        li.list-group-item Tussenvoegsel: #{mName}
+        li.list-group-item Achternaam: #{lName}
+        li.list-group-item Bedrijf: #{businessName}
+        li.list-group-item Telefoon: #{tel}
+        li.list-group-item E-mail: #{email}
+        li.list-group-item Straatnaam: #{streetName}
+        li.list-group-item Plaats: #{placeOfResidence}
+        li.list-group-item Provincie: #{province}
+        li.list-group-item Postcode: #{postalCode}
+        li.list-group-item Huisnummer: #{streetNumber}
+        li.list-group-item Land: #{country}
+
+    p Meer Spellen?
+    a.btn.btn-primary(href="http://www.spelletjeskast.nl/") Spelletjes Kast Website
+    br
+    p Contact opnemen?
+    a.btn.btn-info(href="http://www.spelletjeskast.nl/contact") Contact
+    p Contact Email: #{contactEmail}
+    p Contact Telefoon Nummer: #{contactTel}
+        
+        
+
+        
+    

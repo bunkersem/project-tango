@@ -1,0 +1,385 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: article_images; Type: TABLE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE TABLE article_images (
+    id integer NOT NULL,
+    article_name character varying(120) NOT NULL,
+    image_name character varying(260) NOT NULL
+);
+
+
+ALTER TABLE article_images OWNER TO "bmewiuhwsccogv";
+
+--
+-- Name: article_images_id_seq; Type: SEQUENCE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE SEQUENCE article_images_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE article_images_id_seq OWNER TO "bmewiuhwsccogv";
+
+--
+-- Name: article_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER SEQUENCE article_images_id_seq OWNED BY article_images.id;
+
+
+--
+-- Name: articles; Type: TABLE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE TABLE articles (
+    description text,
+    title character varying(100) NOT NULL,
+    id integer NOT NULL,
+    name character varying(120) NOT NULL,
+    created bigint,
+    catagory character varying(64) NOT NULL,
+    image_name character varying(260),
+    stock integer NOT NULL,
+    price numeric(12,2) NOT NULL
+);
+
+
+ALTER TABLE articles OWNER TO "bmewiuhwsccogv";
+
+--
+-- Name: COLUMN articles.name; Type: COMMENT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+COMMENT ON COLUMN articles.name IS 'Name (also the name given to the firebase image holder)';
+
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE SEQUENCE articles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE articles_id_seq OWNER TO "bmewiuhwsccogv";
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER SEQUENCE articles_id_seq OWNED BY articles.id;
+
+
+--
+-- Name: google_users; Type: TABLE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE TABLE google_users (
+    id integer NOT NULL,
+    token character varying(512) NOT NULL,
+    email character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    user_id integer NOT NULL,
+    google_id numeric(64,0) NOT NULL
+);
+
+
+ALTER TABLE google_users OWNER TO "bmewiuhwsccogv";
+
+--
+-- Name: google_users_id_seq; Type: SEQUENCE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE SEQUENCE google_users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE google_users_id_seq OWNER TO "bmewiuhwsccogv";
+
+--
+-- Name: google_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER SEQUENCE google_users_id_seq OWNED BY google_users.id;
+
+
+--
+-- Name: facebook_users; Type: TABLE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE TABLE facebook_users (
+    id integer DEFAULT nextval('google_users_id_seq'::regclass) NOT NULL,
+    token character varying(512) NOT NULL,
+    email character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    user_id integer,
+    facebook_id numeric(64,0) NOT NULL
+);
+
+
+ALTER TABLE facebook_users OWNER TO bmewiuhwsccogv;
+
+--
+-- Name: orders; Type: TABLE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE TABLE orders (
+    id integer NOT NULL,
+    article_ids integer[] NOT NULL,
+    created bigint NOT NULL,
+    user_id integer NOT NULL,
+    fname character varying(255) NOT NULL,
+    mname character varying(255) NOT NULL,
+    lname character varying(255) NOT NULL,
+    business_name character varying(255) NOT NULL,
+    tel character varying(32) NOT NULL,
+    email character varying(255) NOT NULL,
+    street_name character varying(255) NOT NULL,
+    place_residence character varying(255) NOT NULL,
+    province character varying(255) NOT NULL,
+    postal_code character varying(32) NOT NULL,
+    street_num character varying(16) NOT NULL,
+    country character varying(8) NOT NULL,
+    remarks text,
+    btw numeric(7,2),
+    delivery numeric(7,2),
+    article_costs numeric(7,2),
+    total numeric(7,2),
+    code text
+);
+
+
+ALTER TABLE orders OWNER TO "bmewiuhwsccogv";
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE SEQUENCE orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE orders_id_seq OWNER TO "bmewiuhwsccogv";
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
+
+
+--
+-- Name: session; Type: TABLE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE TABLE session (
+    sid character varying NOT NULL,
+    sess json NOT NULL,
+    expire timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE session OWNER TO "bmewiuhwsccogv";
+
+--
+-- Name: twitter_users; Type: TABLE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE TABLE twitter_users (
+    id integer DEFAULT nextval('google_users_id_seq'::regclass) NOT NULL,
+    token character varying(512) NOT NULL,
+    email character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    user_id integer NOT NULL,
+    twitter_id numeric(64,0) NOT NULL
+);
+
+
+ALTER TABLE twitter_users OWNER TO "bmewiuhwsccogv";
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    payment_postal_code character varying(255),
+    delivery_postal_code character varying(255),
+    street_number character varying(10),
+    country character varying(64),
+    phone_number character varying(64),
+    name character varying(255)
+);
+
+
+ALTER TABLE users OWNER TO "bmewiuhwsccogv";
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: bmewiuhwsccogv
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_id_seq OWNER TO "bmewiuhwsccogv";
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: article_images id; Type: DEFAULT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER TABLE ONLY article_images ALTER COLUMN id SET DEFAULT nextval('article_images_id_seq'::regclass);
+
+
+--
+-- Name: articles id; Type: DEFAULT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER TABLE ONLY articles ALTER COLUMN id SET DEFAULT nextval('articles_id_seq'::regclass);
+
+
+--
+-- Name: google_users id; Type: DEFAULT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER TABLE ONLY google_users ALTER COLUMN id SET DEFAULT nextval('google_users_id_seq'::regclass);
+
+
+--
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: article_images article_images_pkey; Type: CONSTRAINT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER TABLE ONLY article_images
+    ADD CONSTRAINT article_images_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: facebook_users facebook_users_pkey; Type: CONSTRAINT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER TABLE ONLY facebook_users
+    ADD CONSTRAINT facebook_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: google_users google_users_pkey; Type: CONSTRAINT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER TABLE ONLY google_users
+    ADD CONSTRAINT google_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: session session_pkey; Type: CONSTRAINT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER TABLE ONLY session
+    ADD CONSTRAINT session_pkey PRIMARY KEY (sid);
+
+
+--
+-- Name: twitter_users twitter_users_pkey; Type: CONSTRAINT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER TABLE ONLY twitter_users
+    ADD CONSTRAINT twitter_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: bmewiuhwsccogv
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

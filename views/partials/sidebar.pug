@@ -1,0 +1,7 @@
+#sidebar-wrapper.bg-inverse
+    ul.sidebar-nav 
+        li.sidebar-brand.
+            Categorieën
+        each catagory in catagories
+            li
+                a(href= "/?catagory=" + catagory.id)= catagory.name

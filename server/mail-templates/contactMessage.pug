@@ -1,0 +1,29 @@
+style
+    //-
+       $color-danger: rgb(223, 56, 44);
+       $color-success: rgb(56, 180, 74);
+       $color-info: rgb(119, 41, 83);
+       $color-primary: rgb(233, 84, 32);
+       $color-warning: rgb(239, 183, 62);
+       $color-default: rgb(174, 167, 159);
+
+
+    include ../../public/stylesheets/main.css
+
+#wrapper
+    p.lead Nieuw Bericht:
+    p Naam: #{contactName}
+    p E-mail: #{contactEmail}
+    p Onderwerp: #{contactSubject}
+    p.mt-2 Bericht:
+
+    .panel.panel-default
+        .panel-body= contactMessage
+
+
+
+//-
+    contactName
+    contactEmail
+    contactSubject
+    contactMessage

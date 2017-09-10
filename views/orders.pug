@@ -1,0 +1,60 @@
+extends partials/layout
+block head
+    link(rel="canonical", herf="/accounts/orders")
+
+
+block content
+    section.container.pageContent(style="min-height: 40%;")
+        - var i = -1;
+        - var orderIdentifier;
+        each order in orders || []
+            - i++;
+            - orderIdentifier = 'order' + i;
+            .panel.panel-default
+                - var date = new Date( parseInt( order.created ) )
+                .panel-heading
+                    strong Bestelling: #{date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate()}
+                .panel-body
+                    button.btn.btn-info(data-toggle="collapse", data-target= '#' + orderIdentifier + 'delivery') Verzending
+                    button.btn.btn-info(data-toggle= "collapse", data-target= '#' + orderIdentifier + 'costs') Kosten
+                    button.btn.btn-info(data-toggle= "collapse", data-target= '#' + orderIdentifier + 'articles') Artikelen
+                ul.list-group
+                    li.list-group-item Code: 
+                        strong #{order.code}
+                    .collapse(id= orderIdentifier + 'delivery')
+                        li.list-group-item
+                            b Verzending
+                        li.list-group-item Besteld: #{date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate()}
+                        li.list-group-item Plaats: #{order.placeOfResidence}
+                        li.list-group-item Provincie: #{order.province}
+                        li.list-group-item Land: #{order.country}
+                        li.list-group-item Postcode: #{order.postalCode}
+                        li.list-group-item Huis nummer: #{order.streetNumber}
+                        li.list-group-item Straatnaam: #{order.streetName}
+                    
+                    .collapse(id= orderIdentifier + 'costs')
+                        li.list-group-item
+                            b Kosten
+                        li.list-group-item Btw(21%): #{order.btw}€
+                        li.list-group-item Verzending: #{order.delivery}€
+                        li.list-group-item Artikelen: #{order.articleCosts}€
+                        li.list-group-item Totaal: #{order.total}€
+                    .collapse(id= orderIdentifier + 'articles')
+                        li.list-group-item
+                            b Artikelen
+                        - var j = -1;
+                        each artId in order.articleIds || []
+                            - j++;
+                            li.list-group-item
+                                a(href= '/articles/article?id=' + artId)
+                                    //- The name will be set on the client side.
+                                    span.orderArticlesItem(data-id= artId)= 'Artikel ' + j
+                            
+                        
+                        
+
+
+            
+            
+
+        

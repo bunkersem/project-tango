@@ -1,0 +1,33 @@
+extends ./partials/layout
+
+block head
+    link(rel="canonical", href="/")
+
+block content
+    #banner
+    section.container.pageContent
+        if welcome
+            .ml-1
+                h2.text-primary
+                    span.glyphicon.glyphicon-knight
+                    |   SpelletjesKast
+                p.lead
+                    |   Welkom op spelletjeskast.nl
+                    
+                
+    
+    section.pageContent.container
+        
+        if !catagory || !catagory.name
+            - catagory = {name:'*'}
+        
+        .container-fluid.article-container(sort-by= sortby, catagory= catagory.name, limit= limit, search= search, offset= offset)
+            .row
+                - var n = 12
+                while n-- > 0
+                    .col-xs-4(style="padding: 10px;")
+                        .article
+                            div.article-image
+                            h3.article-title
+                            .article-id.hidden
+                            a.article-more.btn.btn-info.ripple Bekijken

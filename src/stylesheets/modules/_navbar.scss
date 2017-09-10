@@ -1,0 +1,18 @@
+#navbar-upper {
+    margin: 0;
+    background: $frontground;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    margin-bottom: 0;
+}
+
+#menu-toggle {
+    display: inline-block;
+    margin: 0px 0 0px 7px;
+    padding: 8px;
+    color:white;
+    font-size: 21px;
+}

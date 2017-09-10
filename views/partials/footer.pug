@@ -1,0 +1,32 @@
+section.container.footer
+    .col.col-lg-3.col-sm-6.col-sm-12.mb-4
+        h2.mb-3 Gegevens
+        h4 spelletjeskast.nl
+        h4 KvK-nummer: #{kvk}
+        h4 BTW-nummer: #{btw} (BTW volgens Margeregeling)
+    .col.col-lg-3.col-sm-6.col-sm-12.mb-4
+        h2.mb-3
+            a(href="/about") Informatie
+        h4
+            a(href="/about#delivery") Levertijd en Bezorging
+        h4
+            a(href="/about#deliveryCosts") Verzendkosten
+        h4
+            a(href="/about#returns") Retourneren
+        h4
+            a(href="/about#termsAndCondition") Voorwaarden
+    .visible-sm.clearfix
+    .col.col-lg-3.col-sm-6.col-sm-12.mb-4
+        h2.mb-3 Mijn Account
+        h4
+            a(href="/accounts/orders") Mijn bestellingen
+    .col.col-lg-3.col-sm-6.col-sm-12.mb-4
+        h2.mb-3
+            a(href="/contact") Contact
+        h4
+            a(href= 'mailto:' + contact.email) Email: #{contact.email}
+        h4
+            a(href='tel:' + contact.tel) Tel: #{contact.tel}
+        h4
+            a(href="https://www.google.nl/maps/place/Oosterhout/@51.6440559,4.7760356,12z", target="_blank") Oosterhout, Noord-Brabant
+

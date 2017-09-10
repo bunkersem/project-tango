@@ -1,0 +1,96 @@
+{
+    "resources": {
+        "article": {
+            "catagories": [
+                {"id":0, "name":"Bordspel"},
+                {"id":1, "name":"Kaartspel"},
+                {"id":2, "name":"Baby speelgoed"},
+                {"id":3, "name":"Educatief"},
+                {"id":4, "name":"Creatief"},
+                {"id":5, "name":"Overigen"},
+                {"id":6, "name":"Lego"},
+                {"id":7, "name":"Tech"},
+                {"id":8, "name":"Playmobiel"},
+                {"id":9, "name":"Puzzels (Volwassen)"},
+                {"id":10, "name":"Puzzels (Kinderen)"},
+                {"id":11, "name":"Onderdelen"}
+            ]
+        },
+        "description": "Een description voor deze website",
+        "keywords": "Keywords, voor, deze, website"
+    },
+    "authentication": {
+        "googleAuth": {
+            "clientID": "946389181342-3ah54sc2tphrs4rd26tjr4oltecdtgak.apps.googleusercontent.com",
+            "clientSecret": "SaU8_rKxihdVN3HRVTOX9N70",
+            "callbackURL": "/auth/google/callback/",
+            "passReqToCallback" : true
+        },
+        "facebookAuth": {
+            "clientID": "1399285010108555",
+            "clientSecret": "f54f358c8d9593da04532353e0553be4",
+            "callbackURL": "/auth/facebook/callback/",
+            "profileFields": ["id", "emails", "displayName"],
+            "passReqToCallback" : true
+        },
+        "facebookAuthLocal": {
+            "clientID": "435936060139768",
+            "clientSecret": "84617cb9b3a005b243bb6d3160f2f9f1",
+            "callbackURL": "/auth/facebook/callback/",
+            "profileFields": ["id", "emails", "displayName"],
+            "passReqToCallback" : true
+        },
+        "twitterAuth": {
+            "consumerKey": "9S376UYzmqcFQJQ3LtzALyRfd",
+            "consumerSecret": "0RpOFhqeMZnVzaGa8z7wASqgJekGGVZVHXLTAVMwkczydh6bQt",
+            "callbackURL": "/auth/twitter/callback",
+            "userProfileURL"  : "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true",
+            "passReqToCallback" : true
+        },
+        "twitterAuthLocal": {
+            "consumerKey": "gkyhFp2y8UAIlZrwSDjrj7b9x",
+            "consumerSecret": "wCyX0JVXIkAlKgQrVBHBV3lLus6LR8Lpf0NCzrN4DPXhTLR1sZ",
+            "callbackURL": "/auth/twitter/callback",
+            "userProfileURL": "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true",
+            "passReqToCallback" : true
+        }
+    },
+    "mailer": {
+        "google":{
+            "accessToken": "ya29.GluKBEySuT3xS5GUYfCjgAIZbdZdR82Da3FRegsrn2qHdS1revKQJjeYiplZnxiS7iV_tw0qKLoHHBRVQM4t7LaqvXAgBW19pDcdLhI2ygEGbwRYb2YiLuJUm5f3",
+            "refreshToken": "1/lUrWOb4tK4zT4FmZjwixki3OyWykWTVz8JSclJlx6Dg",
+            "user": "Spelletjes Kast",
+            "id": "111430997619095340632",
+            "adress": "spelletjeskastnl@gmail.com",
+            "password": "p7$3ckR>&*c/Y"
+        },
+        "adminMails":["sem.postma@gmail.com"]
+    },
+    "contact":{
+        "tel": "0612345678",
+        "email": "spel.kast@gmail.com",
+        "displayDomain":"www.spelletjeskast.nl",
+        "personalName":"voornaam achternaam",
+        "streetName": "voorbeeld straat",
+        "streetNum": "42",
+        "postalCode":"1234FK",
+        "residence":"Oosterhout NB",
+        "whatsapp":"0612345678",
+        "facebook":"www.fakefacebookpage.com",
+        "twitter":"www.faketwitterpage.com",
+        "twitterName":"@spellenfake2019"
+
+    },
+    "payment":{
+        "iban": "NL47-***************",
+        "bankAbbrev": "ASNB",
+        "bic":"ASNBNL2H",
+        "kvk": 12345678,
+        "btw": "NL12345678C90"
+
+    },
+    "captcha":{
+        "secretKey":"6LeSIyoUAAAAAKJwZA847sh8XiusFjrDQrRO4xcy",
+        "siteKey":"6LeSIyoUAAAAABkCh7MbjgNpn_SDOYW5wLO59REr"
+    }
+}

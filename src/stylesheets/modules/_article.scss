@@ -1,0 +1,36 @@
+.article {
+    .article-content {
+        height: 700px;
+        @media screen and (max-width: $md) {
+            height: 800px;
+        }
+        @media screen and (max-width: $sm) {
+            height: 900px;
+        }
+        @media screen and (max-width: $xs) {
+            height: auto;
+        }
+        img {
+            width: 100%;
+        }
+        .panel-body {
+            overflow: hidden;
+            overflow-y: auto;
+        }
+            
+    }
+    .article-button {
+        
+    }
+}
+
+.img-subject {
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-clip: border-box;
+    background-position: center center;
+    float: left;
+    margin: 5px;
+}

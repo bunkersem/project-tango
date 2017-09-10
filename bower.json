@@ -1,0 +1,26 @@
+{
+  "name": "proj-tango",
+  "authors": [
+    "Sem Postma"
+  ],
+  "keywords": [
+    "webshop",
+    "tango",
+    "marktplaats"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "css-ripple-effect": "^1.0.8",
+    "roboto-fontface": "^0.7.0",
+    "jquery": "^3.2.1",
+    "bootswatch-dist": "united",
+    "bootstrap": "3"
+  }
+}

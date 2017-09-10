@@ -1,0 +1,13 @@
+extends ./skeleton
+block head
+block page
+    include navbar
+    block header
+    #wrapper
+        include sidebar
+        #page-content-wrapper.container-fluid.m-0.p-0
+            block content
+            include footer
+    include ./cookieNotice
+    block modals
+block scripts

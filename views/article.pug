@@ -1,0 +1,58 @@
+extends partials/layout
+block head
+    link(rel="canonical", href="/articles/article")
+
+block content
+    section.pageContent.container
+        .jumbotron.jumbotron-primary
+            h1 Hello
+            .lead.
+                Hello World
+    
+    section.pageContent.container 
+        .row
+            #article
+                .col-xs-8#article-main
+                    .well
+                        
+                        h1#article-title
+                        div#article-image.img.img-subject.img-circle
+                        .clearfix
+                        p#article-description
+                        
+                .col-xs-4#article-side
+                    .well
+                        p
+                            em Categorie: 
+                                span#article-catagory
+                        p
+                            small Voorraad: 
+                                span#article-stock
+                        p
+                            small Gecreëerd op: 
+                                span#article-created
+                        p
+                            small Prijs:
+                                span#article-price
+                        p Unieke artikel code: 
+                            span#article-id
+                        .form-group
+                            input#amount.integer(type="text" value="1")
+                            a#article-buy.btn.btn-primary.ripple.mt-1(onclick="addArticleToBasket(event)") Bestellen
+
+
+
+block modals
+    #articleWillOrder.modal.fade(tabindex="-1", role="dialog")
+        .modal-dialog(role="document")
+            .modal-content
+                .modal-header
+                    button.close.ripple.btn.btn-warning(data-dismiss="modal", type="button", aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4.modal-title Klaar?
+                .modal-body
+                    #message
+                    
+                .modal-footer
+                    button.btn.btn-default(type="button", style="float: left;", data-dismiss="modal") Verder Winkelen
+                    a.btn.btn-primary(href="/checkout") Bestellen
